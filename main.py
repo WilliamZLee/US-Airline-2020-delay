@@ -39,14 +39,14 @@ late_aircraft_delay：由于飞机迟到而造成的延误总分钟数。
 
 
 
+from geopy.geocoders import Nominatim  ### 地理信息（经纬度）
+
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 ## import pacakge
-import pandas as pd   #### 分析package
-from geopy.geocoders import Nominatim  ### 地理信息（经纬度）
-import matplotlib.pyplot as plt                     ##### 分布图
+
 airports_data = pd.read_csv('D:/Duke/UWA/2023S2/5101/Team assignment/airports.csv')
 airline_delay_data = pd.read_csv('D:/Duke/UWA/2023S2/5101/Team assignment/airline_delay_causes_Feb2020.csv')
 #chloe is here
