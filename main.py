@@ -51,5 +51,4 @@ airline_delay_data = pd.read_csv('D:/Duke/UWA/2023S2/5101/Team assignment/airlin
 
 
 ## this is just for test
-
-## 1.1 for loop
+# def
