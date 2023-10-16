@@ -1,3 +1,9 @@
+import pandas as pd
+from geopy.geocoders import Nominatim
+import matplotlib.pyplot as plt
+
+
+
 #### 数据集包含两个自变量x和y，你可以使用pandas库提供的corr()函数计算它们之间的相关系数####
 correlation = data['x'].corr(data['y'])
 print('Correlation:', correlation)
@@ -65,4 +71,4 @@ plt.scatter(lons, lats, marker='o', color='r')
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 plt.title('City Coordinates')
-plt.show()
+plt.show()plt.show()
