@@ -2,13 +2,15 @@ import main
 import pandas as pd
 import numpy as np
 from pandas import DataFrame
-'''sort by state'''
+
+'''
+#sort by state
 
 delay_by_state = main.airline_delay_data.groupby('state')
 delay_counts_total = delay_by_state.arr_del15.sum()
 # print(delay_counts_total.sort_values(ascending=False))
 
-'''each state factor sort '''
+#each state factor sort
 
 delay_carrier_ct = delay_by_state.carrier_ct.sum()
 Dcarrier_ct = pd.DataFrame(delay_carrier_ct,columns=['carrier_ct'])
@@ -28,14 +30,24 @@ Darr_diverted_ct = pd.DataFrame(delay_arr_diverted_ct,columns=['arr_diverted'])
 delay_state_factor = pd.concat([Dcarrier_ct,Dweather_ct,delay_nas_ct,
                                 Dsecurity_ct,Dlate_aircraft_ct,Darr_cancelled_ct,
                                 Darr_diverted_ct],axis = 1, sort = False)
-## print(delay_state_factor)
+#print(delay_state_factor)
 
 ## idea: use idxmax to find the main factor in each row
 ## get rate of each state plot
 ## airport/company
 
+delay_state_factor['arr_cancelled'] = delay_state_factor['arr_cancelled'].astype(float)
+delay_state_factor['arr_diverted'] = delay_state_factor['arr_diverted'].astype(float)
+# delay_state_factor.info()
 
-
-
-
-
+delay_state_factor_max = pd.DataFrame()
+delay_state_factor_max['max'] = delay_state_factor.max(axis=1)
+delay_state_factor_max['max_idx'] = delay_state_factor.idxmax(axis=1)
+delay_state_factor1 = pd.concat([delay_state_factor,delay_state_factor_max],axis=1,
+                               join='outer',ignore_index=False)
+print(delay_state_factor1)
+'''
+'''Sort by Carrier Name'''
+delay_by_carrier = main.airline_delay_data.groupby('carrier_name')
+delay_counts_total_c = delay_by_carrier.arr_del15.sum()
+print(delay_counts_total_c.sort_values(ascending=False))
