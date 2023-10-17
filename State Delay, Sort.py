@@ -1,13 +1,41 @@
 import main
 import pandas as pd
 import numpy as np
-
+from pandas import DataFrame
 '''sort by state'''
+
 delay_by_state = main.airline_delay_data.groupby('state')
-delay_counts = delay_by_state.arr_del15.sum()
-print(delay_counts.sort_values(ascending=False))
+delay_counts_total = delay_by_state.arr_del15.sum()
+# print(delay_counts_total.sort_values(ascending=False))
 
 '''each state factor sort '''
+
+delay_carrier_ct = delay_by_state.carrier_ct.sum()
+Dcarrier_ct = pd.DataFrame(delay_carrier_ct,columns=['carrier_ct'])
+delay_weather_ct = delay_by_state.weather_ct.sum()
+Dweather_ct = pd.DataFrame(delay_weather_ct,columns=['weather_ct'])
+delay_nas_ct = delay_by_state.nas_ct.sum()
+Dnas_ct = pd.DataFrame(delay_nas_ct,columns=['nas_ct'])
+delay_security_ct = delay_by_state.security_ct.sum()
+Dsecurity_ct = pd.DataFrame(delay_security_ct,columns=['security_ct'])
+delay_late_aircraft_ct = delay_by_state.late_aircraft_ct.sum()
+Dlate_aircraft_ct = pd.DataFrame(delay_late_aircraft_ct,columns=['late_aircraft_ct'])
+delay_arr_cancelled_ct = delay_by_state.arr_cancelled.sum()
+Darr_cancelled_ct = pd.DataFrame(delay_arr_cancelled_ct,columns=['arr_cancelled'])
+delay_arr_diverted_ct = delay_by_state.arr_diverted.sum()
+Darr_diverted_ct = pd.DataFrame(delay_arr_diverted_ct,columns=['arr_diverted'])
+
+delay_state_factor = pd.concat([Dcarrier_ct,Dweather_ct,delay_nas_ct,
+                                Dsecurity_ct,Dlate_aircraft_ct,Darr_cancelled_ct,
+                                Darr_diverted_ct],axis = 1, sort = False)
+## print(delay_state_factor)
+
+## idea: use idxmax to find the main factor in each row
+## get rate of each state plot
+## airport/company
+
+
+
 
 
 
