@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 airports_data = pd.read_csv('data/airports.csv')
 airline_delay_data = pd.read_csv('data/airline_delay_causes_Feb2020.csv')
 
-## airline_delay_data.info()
-## airports_data.info()
+airline_delay_data.info()
+airports_data.info()
 
 delay_count = airline_delay_data[['state', 'carrier_ct', 'weather_ct',
                                   'nas_ct','security_ct', 'late_aircraft_ct',

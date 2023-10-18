@@ -1,19 +1,48 @@
-import pandas as pd
+import matplotlib
+import numpy as np
 import matplotlib.pyplot as plt
-
+import pandas as pd
+import folium
+from folium.plugins import HeatMap
 import main
 
-filtered_airports_data = main.airports_data[(main.airports_data['lat'] >= 32) &
-                                            (main.airports_data['lat'] <= 37) &
-                                            (main.airports_data['long'] >= -100) &
-                                            (main.airports_data['long'] <= -80)]
+'''filter of lat & long'''
+filtered_airports_data = main.airports_data.set_index('airport',drop=True)
+filtered_airports_data1 = pd.DataFrame(filtered_airports_data,
+                                       columns=['lat','long'])[(filtered_airports_data['lat'] >= 32) &
+                                            (filtered_airports_data['lat'] <= 37) &
+                                            (filtered_airports_data['long'] >= -100) &
+                                            (filtered_airports_data['long'] <= -80)]
+print(filtered_airports_data1)
+filtered_airports_data1.info()
 
-plt.figure(figsize = (10,6))
-plt.scatter(filtered_airports_data.long, filtered_airports_data.lat,
-            c = 'blue', marker= 'o', label = 'Airport')
+'''scatter_plot'''
+x = filtered_airports_data1.lat
+y = filtered_airports_data1.long
+
+print(len(x))
+print(len(y))
+matplotlib.use("Qt5Agg")
+plt.scatter(x,y,c = 'blue')
+plt.savefig('figure1.png')
+
+'''heatmap1'''
+plt.figure(figsize=(10, 6))
+plt.hexbin(y, x, gridsize=30, cmap='YlOrRd')
 plt.title('Airports within Latitude 32° to 37° and Longitude -100° to -80°')
-plt.xlabel('long')
-plt.ylabel('lat')
-plt.grid(Ture)
-plt.legend()
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.colorbar(label='Frequency')
+plt.grid(False)
 plt.show()
+plt.savefig('figure2.png')
+
+'''geographical heat map'''
+# Create a base map
+m = folium.Map(location=[34.5, -90], zoom_start=5)
+
+# Add the heatmap
+heat_data = [[row['lat'], row['long']] for index, row in filtered_airports_data1.iterrows()]
+HeatMap(heat_data).add_to(m)
+
+m.save('heatmap.html')
