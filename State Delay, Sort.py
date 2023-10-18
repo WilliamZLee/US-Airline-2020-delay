@@ -3,6 +3,14 @@ import pandas as pd
 import numpy as np
 from pandas import DataFrame
 
+'''delay serverity by state'''
+delay_serverity = main.airline_delay_data.groupby('state')
+delay_times_total = delay_serverity.arr_delay.sum()
+print(delay_times_total.sort_values(ascending=False))
+
+delay_by_state = main.airline_delay_data.groupby('state')
+delay_counts_total = delay_by_state.arr_del15.sum()
+print(delay_counts_total.sort_values(ascending=False))
 '''
 #sort by state
 
@@ -48,6 +56,8 @@ delay_state_factor1 = pd.concat([delay_state_factor,delay_state_factor_max],axis
 print(delay_state_factor1)
 '''
 '''Sort by Carrier Name'''
+'''
 delay_by_carrier = main.airline_delay_data.groupby('carrier_name')
 delay_counts_total_c = delay_by_carrier.arr_del15.sum()
 print(delay_counts_total_c.sort_values(ascending=False))
+'''

@@ -2,6 +2,11 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 import matplotlib.pyplot as plt
 
+#sort by state
+
+delay_by_state = main.airline_delay_data.groupby('state')
+delay_counts_total = delay_by_state.arr_del15.sum()
+print(delay_counts_total.sort_values(ascending=False))
 
 
 #### 数据集包含两个自变量x和y，你可以使用pandas库提供的corr()函数计算它们之间的相关系数####
