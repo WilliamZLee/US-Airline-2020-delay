@@ -24,7 +24,8 @@ print(len(x))
 print(len(y))
 matplotlib.use("Qt5Agg")
 plt.scatter(x,y,c = 'blue')
-plt.savefig('figure1.png')
+plt.savefig('plot/filtered airports in scatter plot.png')
+plt.close()
 
 '''heatmap1'''
 plt.figure(figsize=(10, 6))
@@ -35,7 +36,8 @@ plt.ylabel('Latitude')
 plt.colorbar(label='Frequency')
 plt.grid(False)
 plt.show()
-plt.savefig('figure2.png')
+plt.savefig('plot/filtered airports in hexagonal bin plot.png')
+plt.close()
 
 '''geographical heat map'''
 # Create a base map
@@ -45,4 +47,4 @@ m = folium.Map(location=[34.5, -90], zoom_start=5)
 heat_data = [[row['lat'], row['long']] for index, row in filtered_airports_data1.iterrows()]
 HeatMap(heat_data).add_to(m)
 
-m.save('heatmap.html')
+m.save('plot/heatmap.html')

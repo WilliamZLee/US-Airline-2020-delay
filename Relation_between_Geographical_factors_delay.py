@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib
 import main
 
+columns = main.delay_count.columns.values.tolist()
+
 #sort by state
 delay_by_state = main.airline_delay_data.groupby('state')
 delay_counts_total = delay_by_state.arr_del15.sum()
@@ -31,5 +33,7 @@ plt.colorbar()
 plt.xticks(range(len(columns) - 2), columns[2:])
 plt.yticks(range(len(columns) - 2), columns[2:])
 plt.title('Correlation Matrix of Delay Types')
+plt.savefig("plot/figure_correlation_matrix.png")
 plt.show()
-plt.savefig("figure_correlation_matrix.png")
+plt.close()
+
