@@ -1,0 +1,63 @@
+# US-Airline-2020-delay
+• US airport information, airports.csv file, which includes details such as airport names, cities, and latitude 
+(lat) and longitude (long) coordinates.
+• A flight delay dataset from February 2020, airline_delay_causes_Feb2020.csv file, which includes 
+information on airline delays. These delays are presented in two forms: counts of delayed flights and the 
+duration of delays in minutes. Additionally, the dataset provides the causes of airline delays, as listed below:
+
+Air Carrier 
+Delay
+Weather 
+Delay
+National Aviation 
+System (NAS) 
+Delay
+Security 
+Delay
+Aircraft 
+Arriving Late
+Cancelled Diverted
+
+'''
+Tasks:
+1. What are the primary factors leading to the most substantial delays in each state? Rank the states from the
+highest to the lowest delay severity, and perform an in-depth analysis of delay types, their frequency, and
+the airlines most impacted by these delays.
+2. Identify airlines or airports that have consistently demonstrated effective delay management strategies.
+What lessons can be learned from their practices?
+3. Analyse the geographical distribution of delays. Investigate whether certain types of delays are correlated
+with specific geographical factors (e.g., airport size, location). Are there patterns that suggest the need for
+infrastructure improvements etc.?
+4. Identify airports within the latitude range of 32° to 37° and the longitude range of -100° to -80° and visualize
+them using a heatmap.
+5. Using a pie chart present a display the percentage of on-time flights, and the items listed in the table above.
+6. Imagine you are an aviation analyst tasked with improving the overall efficiency and reliability of air travel
+in the US. Using the provided flight delay dataset, devise a novel strategy or approach to reduce flight delays
+and improve the passenger experience. Explain your proposed strategy, the data-driven insights that
+support it, and the potential challenges and benefits of implementing it. Be creative and consider both
+short-term and long-term impacts on the US aviation industry.
+'''
+
+''' Factors' meaning
+year： Year of data (2020 for all entries)
+month： Month of data (February for all entries)
+carrier： Airline Code
+carrier_name: Name of Airline
+airport: Airport Code
+airport_name: Name of Airport
+arr_flights： Number of arriving flights
+arr_del15: Number of flights delayed by 15 minutes or more
+carrier_ct： Number of flights delayed due to airlines
+weather_ct： Number of flights delayed due to weather
+nas_ct： Number of flights delayed due to National Airspace System (NAS)
+security_ct： Number of flight delays due to security issues
+late_aircraft_ct： Number of flights delayed due to late arrival of aircraft
+arr_cancelled： Number of cancelled arrival flights
+arr_diverted： Number of arrivals diverted
+arr_delay： Total minutes of arrival delays
+carrier_delay： Total minutes of delay attributed to airlines
+weather_delay： Total minutes of delay due to weather
+nas_delay： Total minutes of delay due to NAS issues
+security_delay： Total minutes of delay due to security issues
+late_aircraft_delay： Total minutes of delay due to late arrival of aircraft
+'''
