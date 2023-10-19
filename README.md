@@ -18,8 +18,7 @@ Aircraft
 Arriving Late
 Cancelled Diverted
 
-'''
-Tasks:
+• Tasks:
 1. What are the primary factors leading to the most substantial delays in each state? Rank the states from the
 highest to the lowest delay severity, and perform an in-depth analysis of delay types, their frequency, and
 the airlines most impacted by these delays.
@@ -36,9 +35,8 @@ in the US. Using the provided flight delay dataset, devise a novel strategy or a
 and improve the passenger experience. Explain your proposed strategy, the data-driven insights that
 support it, and the potential challenges and benefits of implementing it. Be creative and consider both
 short-term and long-term impacts on the US aviation industry.
-'''
 
-''' Factors' meaning
+• Factors' meaning：
 year： Year of data (2020 for all entries)
 month： Month of data (February for all entries)
 carrier： Airline Code
@@ -60,4 +58,4 @@ weather_delay： Total minutes of delay due to weather
 nas_delay： Total minutes of delay due to NAS issues
 security_delay： Total minutes of delay due to security issues
 late_aircraft_delay： Total minutes of delay due to late arrival of aircraft
-'''
+
