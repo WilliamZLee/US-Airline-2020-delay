@@ -5,7 +5,7 @@ import folium
 from folium.plugins import HeatMap
 
 def plot_fiiltered_airports_heatmap(airports_data):
-    '''filter of lat & long'''
+    ## filter of lat & long
     filtered_airports_data = airports_data.set_index('airport', drop=True)
     filtered_airports_data1 = pd.DataFrame(filtered_airports_data,
                                            columns=['lat', 'long'])[(filtered_airports_data['lat'] >= 32) &

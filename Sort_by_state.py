@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def delay_analysis_by_state(airline_delay_data, factors):
-    '''Group and calculate total delays'''
+    ## total delay by state
     delay_serverity = airline_delay_data.groupby('state')
     delay_times_total = delay_serverity['arr_delay'].sum()
     print(delay_times_total.sort_values(ascending=False))
