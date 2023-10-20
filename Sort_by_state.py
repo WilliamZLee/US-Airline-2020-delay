@@ -1,5 +1,6 @@
 import matplotlib
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def delay_analysis_by_state(airline_delay_data, factors):
@@ -19,6 +20,8 @@ def delay_analysis_by_state(airline_delay_data, factors):
     '''Calculate maximum factors and their indexes'''
     delay_state_factor['max'] = delay_state_factor.max(axis=1)
     delay_state_factor['max_idx'] = delay_state_factor.idxmax(axis=1)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.expand_frame_repr',False)
     print(delay_state_factor)
 
     '''Group and calculate the number of delays sorted by airline name'''
