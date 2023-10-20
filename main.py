@@ -38,6 +38,7 @@ def run_analysis(airline_delay_data, delay_count, airports_data, flights_count):
     print('-----------------------------------------------------------------------------------------------------------')
     print("\nCarrier delay control analysis: ")
     sbc.Carrier_strategies(airline_delay_data)
+    sbc.Airport_strategies(airline_delay_data)
 
     print('-----------------------------------------------------------------------------------------------------------')
     print("\nSort by Airports: ")
