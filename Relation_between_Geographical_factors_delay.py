@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
+import pandas as pd
+
 def calculate_delay_correlation(delay_count, airline_delay_data):
     columns = delay_count.columns.values.tolist()
 
@@ -16,6 +18,7 @@ def calculate_delay_correlation(delay_count, airline_delay_data):
     mean_delays = grouped_airline_delay_data.mean()
     correlation = mean_delays.corr()
     np.fill_diagonal(correlation.values, np.nan)
+    pd.set_option('display.max_columns',None)
     print(correlation)
 
     '''visualization of correlation matrix'''
