@@ -18,6 +18,19 @@ def Carrier_strategies(airline_delay_data):
     print(Sorted_control_level)
     print('-----------------------------------------------------------------------------------------------------------')
 
+    ## detail of best6 delay control carriers
+    filtered_carriers = airline_delay_data[airline_delay_data['carrier_name'].isin(Sorted_control_level.tail(6).index)]
+    selected_columns = ['carrier_name', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
+                        'late_aircraft_ct', 'arr_cancelled', 'arr_diverted']
+    filtered_carriers_selected = filtered_carriers[selected_columns].groupby('carrier_name').sum()
+
+    filtered_carriers_selected['min'] = filtered_carriers_selected[selected_columns[1:]].idxmin(axis=1)
+    filtered_carriers_selected['min_value'] = filtered_carriers_selected[selected_columns[1:]].min(axis=1)
+
+    print("\n how these carriers control delay: \n")
+    print(filtered_carriers_selected)
+    print('-----------------------------------------------------------------------------------------------------------')
+
     ## figure of best delay control carriers
     matplotlib.use("Qt5Agg")
     plt.figure(figsize=[15,8])
@@ -47,7 +60,20 @@ def Airport_strategies(airline_delay_data):
     print(best6_airports)
     print('-----------------------------------------------------------------------------------------------------------')
 
-    ## figure of best delay control carriers
+    ## detail of best6 delay control carriers
+    filtered_airports = airline_delay_data[airline_delay_data['airport_name'].isin(best6_airports.index)]
+    selected_columns = ['airport_name', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
+                        'late_aircraft_ct', 'arr_cancelled', 'arr_diverted']
+    filtered_airports_selected = filtered_airports[selected_columns].groupby('airport_name').sum()
+
+    filtered_airports_selected['min'] = filtered_airports_selected[selected_columns[1:]].idxmin(axis=1)
+    filtered_airports_selected['min_value'] = filtered_airports_selected[selected_columns[1:]].min(axis=1)
+
+    print("\n how these airports control delay: \n")
+    print(filtered_airports_selected)
+    print('-----------------------------------------------------------------------------------------------------------')
+
+    # figure of best delay control carriers
     matplotlib.use("Qt5Agg")
     plt.figure(figsize=[15,10])
     ''' set ylab as percentage'''

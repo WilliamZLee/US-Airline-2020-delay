@@ -18,9 +18,11 @@ def filter_top_airports_by_state(airline_delay_data, top_states):
 
     ## filitered top affected airports delay factor
     filtered_data = airline_delay_data[airline_delay_data['airport_name'].isin(sorted_delay_ratio.head(10).index)]
-    selected_columns = ['airport_name', 'state', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
+    selected_columns = ['airport_name', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
                         'late_aircraft_ct', 'arr_cancelled', 'arr_diverted']
-    filtered_data_selected = filtered_data[selected_columns]
+    filtered_data_selected = filtered_data[selected_columns].groupby('airport_name').sum()
+    filtered_data_selected['max'] = filtered_data_selected[selected_columns[1:]].idxmax(axis=1)
+    filtered_data_selected['max_value'] = filtered_data_selected[selected_columns[1:]].max(axis=1)
     print("\n how these airports been affected by delay factors: \n")
     print(filtered_data_selected)
     print('-----------------------------------------------------------------------------------------------------------')
