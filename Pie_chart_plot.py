@@ -3,9 +3,9 @@ import matplotlib
 
 
 def plot_pie_chart(flights_count, airline_delay_data):
-    ## as we are going to plot pie chart,
-    ## here we don't use tolist() to generate list of columns' names
-    ## define factors from main
+    # as we are going to plot pie chart,
+    # here we don't use tolist() to generate list of columns' names
+    # define factors from main
     total_arr_flight = flights_count.arr_flights.sum()
     total_delay = flights_count.arr_del15.sum()
     total_carrier_delay = airline_delay_data.carrier_ct.sum()
@@ -16,7 +16,7 @@ def plot_pie_chart(flights_count, airline_delay_data):
     total_arr_cancelled = flights_count.arr_cancelled.sum()
     total_arr_diverted = flights_count.arr_diverted.sum()
 
-    ## pie chart of delay / total arrive with hilighted part
+    # pie chart of delay / total arrive with hilighted part
     sizes = [total_delay, total_arr_flight - total_delay]
     labels = ['Delayed flights', 'Flights arrived on time']
     matplotlib.use("Qt5Agg")
@@ -25,7 +25,7 @@ def plot_pie_chart(flights_count, airline_delay_data):
     plt.savefig('plot/Delay on-time rate.png')
     plt.close()
 
-    ## pie chart of table with hilighted three main porprotioin part
+    # pie chart of table with hilighted three main porprotioin part
     sizes1 = [total_carrier_delay, total_weather_delay, total_NAS_delay,
               total_security_delay, total_arriving_late_delay, total_arr_cancelled,
               total_arr_diverted]

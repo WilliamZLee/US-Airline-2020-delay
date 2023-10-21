@@ -7,7 +7,7 @@ def get_top_states(airline_delay_data):
 
 
 def filter_top_airports_by_state(airline_delay_data, top_states):
-    ## delay ratio by airport
+    # delay ratio by airport
     delay_by_airport = airline_delay_data.groupby('airport_name')
     delay_ratio = delay_by_airport['arr_del15'].sum() / delay_by_airport['arr_flights'].sum()
     delay_ratio_filtered = delay_ratio[delay_by_airport['arr_flights'].sum() > 10000]
@@ -16,7 +16,7 @@ def filter_top_airports_by_state(airline_delay_data, top_states):
     print(sorted_delay_ratio.head(10))
     print('-----------------------------------------------------------------------------------------------------------')
 
-    ## filitered top affected airports delay factor
+    # filtered top affected airports delay factor
     filtered_data = airline_delay_data[airline_delay_data['airport_name'].isin(sorted_delay_ratio.head(10).index)]
     selected_columns = ['airport_name', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
                         'late_aircraft_ct', 'arr_cancelled', 'arr_diverted']
@@ -27,7 +27,7 @@ def filter_top_airports_by_state(airline_delay_data, top_states):
     print(filtered_data_selected)
     print('-----------------------------------------------------------------------------------------------------------')
 
-    ##  filtered data by top states
+    # filtered data by top states
     filtered_data = airline_delay_data.loc[airline_delay_data['state'].isin(top_states)]
 
     '''Group by state and airport, and calculate the sum of late_aircraft_ct'''

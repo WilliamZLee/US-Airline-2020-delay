@@ -7,10 +7,10 @@ import pandas as pd
 def calculate_delay_correlation(delay_count):
     columns = delay_count.columns.values.tolist()
 
-    '''use delay_count dataframe for correlation calculation'''
+    # use delay_count dataframe for correlation calculation
     grouped_airline_delay_data = delay_count.groupby(['state'])
 
-    '''calculate mean for calculate correlation and set diagonal as white in convinent of visualization'''
+    # calculate mean for calculate correlation and set diagonal as white in convenient of visualization
     mean_delays = grouped_airline_delay_data.mean()
     correlation = mean_delays.corr()
     np.fill_diagonal(correlation.values, np.nan)
@@ -19,7 +19,7 @@ def calculate_delay_correlation(delay_count):
     print(correlation)
     print('-----------------------------------------------------------------------------------------------------------')
 
-    '''visualization of correlation matrix'''
+    # visualization of correlation matrix
     matplotlib.use("Qt5Agg")
     plt.figure(figsize=(10, 8))
     plt.imshow(correlation, cmap='rainbow', vmin=-1, vmax=1)
