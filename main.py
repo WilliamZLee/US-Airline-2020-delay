@@ -53,7 +53,7 @@ def run_analysis(airline_delay_data, delay_count, airports_data, flights_count):
 
     write_output_to_file(separator)
     write_output_to_file("\nCarrier delay control analysis: ")
-    sbc.Carrier_strategies(airline_delay_data, write_output_to_file,separator)
+    sbc.Carrier_strategies(airline_delay_data, write_output_to_file,separator,factors)
     sbc.Airport_strategies(airline_delay_data, write_output_to_file,separator)
 
     write_output_to_file(separator)

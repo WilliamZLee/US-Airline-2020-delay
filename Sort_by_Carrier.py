@@ -1,16 +1,64 @@
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
+import numpy as np
 import pandas as pd
 
 
-def Carrier_strategies(airline_delay_data,write_output_to_file,separator):
+def Carrier_strategies(airline_delay_data,write_output_to_file,separator, factors):
     # Group and calculate the number of delays caused by carrier sorted by airline name
     delay_by_carrier = airline_delay_data.groupby('carrier_name')
     delay_counts_total_c = delay_by_carrier['carrier_ct'].sum()
     write_output_to_file("\n number of delays caused by carrier sort by carrier: \n")
     write_output_to_file(delay_counts_total_c.sort_values(ascending=False))
     write_output_to_file(separator)
+
+    # plot carriers by delay factors in one combined plot
+    fig,axes = plt.subplots(2,4,figsize = (100,20))
+    images = []
+    for i,factor in enumerate(factors):
+        matplotlib.use("Qt5Agg")
+        ax = axes[i // 4, i % 4]
+        axes[i // 4, i % 4].set_title(f'carrier_delays_by_{factor}')
+        ax.set_title(f'carrier_delays_by_{factor}')
+        delay_factor_sort = delay_by_carrier[factor].sum().sort_values(ascending=False)
+        delay_factor_sort.plot(kind='bar', ax=ax)
+        xticks = np.arange(len(delay_factor_sort.index))
+
+        # labels set to avoid overlaping
+        every_nth = 4
+        ax.set_xticks(xticks[::every_nth])
+        ax.set_xticklabels(delay_factor_sort.index[::every_nth], rotation=-15)
+        ax.autoscale(enable = True, axis = 'both', tight = True)
+        ax.set_xlabel('X Label')
+        ax.set_ylabel('Y Label')
+        # set a pause for canvas to draw combied plot
+        plt.pause(0.1)
+        fig.canvas.draw()
+        image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')
+        image = image.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+        images.append(image)
+
+    rows = images[0].shape[0]
+    cols = images[0].shape[1]
+    combined_rows = rows * 2
+    combined_cols = cols * 4
+
+    combined_image = np.zeros((combined_rows, combined_cols, 3), dtype=np.uint8)
+
+    for i, image in enumerate(images):
+        row = i // 4
+        col = i % 4
+        combined_image[row * rows:(row + 1) * rows, col * cols:(col + 1) * cols, :] = image
+
+    plt.imshow(combined_image)
+    plt.axis('off')
+    plt.tight_layout()
+
+    output_filename = 'combined_carrier_delays.png'
+    output_path = f'plot/{output_filename}'
+    plt.savefig(output_path)
+    plt.close(fig)
 
     # Sort best delay control carriers
     Carrier_control_level = delay_by_carrier['arr_del15'].sum() / delay_by_carrier['arr_flights'].sum()
