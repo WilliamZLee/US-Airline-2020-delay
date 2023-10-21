@@ -6,15 +6,15 @@ def get_top_states(airline_delay_data):
     return top_states
 
 
-def filter_top_airports_by_state(airline_delay_data, top_states):
+def filter_top_airports_by_state(airline_delay_data, top_states,write_output_to_file,separator):
     # delay ratio by airport
     delay_by_airport = airline_delay_data.groupby('airport_name')
     delay_ratio = delay_by_airport['arr_del15'].sum() / delay_by_airport['arr_flights'].sum()
     delay_ratio_filtered = delay_ratio[delay_by_airport['arr_flights'].sum() > 10000]
     sorted_delay_ratio = delay_ratio_filtered.sort_values(ascending=False)
-    print("\n top 10 most delayed airports sort by delay ratio: \n")
-    print(sorted_delay_ratio.head(10))
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n top 10 most delayed airports sort by delay ratio: \n")
+    write_output_to_file(sorted_delay_ratio.head(10))
+    write_output_to_file(separator)
 
     # filtered top affected airports delay factor
     filtered_data = airline_delay_data[airline_delay_data['airport_name'].isin(sorted_delay_ratio.head(10).index)]
@@ -23,9 +23,9 @@ def filter_top_airports_by_state(airline_delay_data, top_states):
     filtered_data_selected = filtered_data[selected_columns].groupby('airport_name').sum()
     filtered_data_selected['max'] = filtered_data_selected[selected_columns[1:]].idxmax(axis=1)
     filtered_data_selected['max_value'] = filtered_data_selected[selected_columns[1:]].max(axis=1)
-    print("\n how these airports been affected by delay factors: \n")
-    print(filtered_data_selected)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n how these airports been affected by delay factors: \n")
+    write_output_to_file(filtered_data_selected)
+    write_output_to_file(separator)
 
     # filtered data by top states
     filtered_data = airline_delay_data.loc[airline_delay_data['state'].isin(top_states)]
@@ -39,7 +39,7 @@ def filter_top_airports_by_state(airline_delay_data, top_states):
     '''Get the top 2 airports for each state and output '''
     top_airports = sorted_data.groupby('state').head(1)
 
-    print("\nTop affected airports by state: ")
-    print(top_airports)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\nTop affected airports by state: ")
+    write_output_to_file(top_airports)
+    write_output_to_file(separator)
     return top_airports

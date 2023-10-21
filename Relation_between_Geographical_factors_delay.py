@@ -4,7 +4,7 @@ import matplotlib
 import pandas as pd
 
 
-def calculate_delay_correlation(delay_count):
+def calculate_delay_correlation(delay_count,write_output_to_file,separator):
     columns = delay_count.columns.values.tolist()
 
     # use delay_count dataframe for correlation calculation
@@ -15,9 +15,9 @@ def calculate_delay_correlation(delay_count):
     correlation = mean_delays.corr()
     np.fill_diagonal(correlation.values, np.nan)
     pd.set_option('display.max_columns', None)
-    print("\n output of correlation matrix: \n")
-    print(correlation)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n output of correlation matrix: \n")
+    write_output_to_file(correlation)
+    write_output_to_file(separator)
 
     # visualization of correlation matrix
     matplotlib.use("Qt5Agg")

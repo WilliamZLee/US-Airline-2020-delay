@@ -5,7 +5,7 @@ import folium
 from folium.plugins import HeatMap
 
 
-def plot_fiiltered_airports_heatmap(airports_data):
+def plot_fiiltered_airports_heatmap(airports_data,write_output_to_file,separator):
     # filter of lat & long
     filtered_airports_data = airports_data.set_index('airport', drop=True)
     filtered_airports_data1 = pd.DataFrame(filtered_airports_data,
@@ -13,12 +13,9 @@ def plot_fiiltered_airports_heatmap(airports_data):
                                                                     (filtered_airports_data['lat'] <= 37) &
                                                                     (filtered_airports_data['long'] >= -100) &
                                                                     (filtered_airports_data['long'] <= -80)]
-    print("\n airports info within this region: \n")
-    print(filtered_airports_data1)
-    print('-----------------------------------------------------------------------------------------------------------')
-    print("\n new dataframe info within this region: \n")
-    filtered_airports_data1.info()
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n airports info within this region: \n")
+    write_output_to_file(filtered_airports_data1)
+    write_output_to_file(separator)
 
     # scatter_plot
     x = filtered_airports_data1.lat

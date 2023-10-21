@@ -4,20 +4,20 @@ import matplotlib.ticker as mticker
 import pandas as pd
 
 
-def Carrier_strategies(airline_delay_data):
+def Carrier_strategies(airline_delay_data,write_output_to_file,separator):
     # Group and calculate the number of delays caused by carrier sorted by airline name
     delay_by_carrier = airline_delay_data.groupby('carrier_name')
     delay_counts_total_c = delay_by_carrier['carrier_ct'].sum()
-    print("\n number of delays caused by carrier sort by carrier: \n")
-    print(delay_counts_total_c.sort_values(ascending=False))
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n number of delays caused by carrier sort by carrier: \n")
+    write_output_to_file(delay_counts_total_c.sort_values(ascending=False))
+    write_output_to_file(separator)
 
     # Sort best delay control carriers
     Carrier_control_level = delay_by_carrier['arr_del15'].sum() / delay_by_carrier['arr_flights'].sum()
     Sorted_control_level = Carrier_control_level.sort_values(ascending=False)
-    print("\n delay control level sort by carrier: \n")
-    print(Sorted_control_level)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n delay control level sort by carrier: \n")
+    write_output_to_file(Sorted_control_level)
+    write_output_to_file(separator)
 
     # detail of best6 delay control carriers
     filtered_carriers = airline_delay_data[airline_delay_data['carrier_name'].isin(Sorted_control_level.tail(6).index)]
@@ -28,9 +28,9 @@ def Carrier_strategies(airline_delay_data):
     filtered_carriers_selected['min'] = filtered_carriers_selected[selected_columns[1:]].idxmin(axis=1)
     filtered_carriers_selected['min_value'] = filtered_carriers_selected[selected_columns[1:]].min(axis=1)
 
-    print("\n how these carriers control delay: \n")
-    print(filtered_carriers_selected)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n how these carriers control delay: \n")
+    write_output_to_file(filtered_carriers_selected)
+    write_output_to_file(separator)
 
     # figure of best delay control carriers
     matplotlib.use("Qt5Agg")
@@ -52,15 +52,15 @@ def Carrier_strategies(airline_delay_data):
     plt.close()
 
 
-def Airport_strategies(airline_delay_data):
+def Airport_strategies(airline_delay_data,write_output_to_file,separator):
     airport_delay = airline_delay_data.groupby('airport_name')
     airport_delay_ratio = airport_delay['arr_del15'].sum() / airport_delay['arr_flights'].sum()
     airport_delay_ratio_filtered = airport_delay_ratio[airport_delay['arr_flights'].sum() > 8000]
     sorted_airport_delay_ratio_filtered = airport_delay_ratio_filtered.sort_values(ascending=False)
     best6_airports = sorted_airport_delay_ratio_filtered.tail(6)
-    print("\n best 6 delay control airports sort by delay ratio: \n")
-    print(best6_airports)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n best 6 delay control airports sort by delay ratio: \n")
+    write_output_to_file(best6_airports)
+    write_output_to_file(separator)
 
     # detail of best6 delay control carriers
     filtered_airports = airline_delay_data[airline_delay_data['airport_name'].isin(best6_airports.index)]
@@ -71,9 +71,9 @@ def Airport_strategies(airline_delay_data):
     filtered_airports_selected['min'] = filtered_airports_selected[selected_columns[1:]].idxmin(axis=1)
     filtered_airports_selected['min_value'] = filtered_airports_selected[selected_columns[1:]].min(axis=1)
 
-    print("\n how these airports control delay: \n")
-    print(filtered_airports_selected)
-    print('-----------------------------------------------------------------------------------------------------------')
+    write_output_to_file("\n how these airports control delay: \n")
+    write_output_to_file(filtered_airports_selected)
+    write_output_to_file(separator)
 
     # figure of best delay control carriers
     matplotlib.use("Qt5Agg")
