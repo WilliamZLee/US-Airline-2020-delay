@@ -345,14 +345,14 @@ dtype: float64
 
  how these carriers control delay: 
 
-                         carrier_ct  weather_ct   nas_ct  security_ct  late_aircraft_ct  arr_cancelled  arr_diverted           min  min_value
-carrier_name                                                                                                                                 
-Alaska Airlines Inc.         736.14       40.01  1215.37        10.24            860.34            176            38   security_ct      10.24
-Delta Air Lines Inc.        2662.67      384.32  3652.94         3.89           3174.12             18            90   security_ct       3.89
-ExpressJet Airlines LLC      319.99       32.96   900.15         0.00            416.87             78            19   security_ct       0.00
-Hawaiian Airlines Inc.       414.71       18.73     9.36         7.39            119.81             32             2  arr_diverted       2.00
-Southwest Airlines Co.      3281.77       79.91  2374.08        34.63           3842.55           1109           112   security_ct      34.63
-United Air Lines Inc.       1389.77      113.00  2742.50         0.00           2237.66             94            77   security_ct       0.00
+                         arr_flights  arr_del15  carrier_ct  weather_ct   nas_ct  security_ct  late_aircraft_ct  arr_cancelled  arr_diverted     min_index  min_value
+carrier_name                                                                                                                                                         
+Alaska Airlines Inc.           19515     2862.0      736.14       40.01  1215.37        10.24            860.34            176            38   security_ct      10.24
+Delta Air Lines Inc.           75446     9878.0     2662.67      384.32  3652.94         3.89           3174.12             18            90   security_ct       3.89
+ExpressJet Airlines LLC        11404     1670.0      319.99       32.96   900.15         0.00            416.87             78            19   security_ct       0.00
+Hawaiian Airlines Inc.          6509      570.0      414.71       18.73     9.36         7.39            119.81             32             2  arr_diverted       2.00
+Southwest Airlines Co.        101581     9613.0     3281.77       79.91  2374.08        34.63           3842.55           1109           112   security_ct      34.63
+United Air Lines Inc.          46244     6483.0     1389.77      113.00  2742.50         0.00           2237.66             94            77   security_ct       0.00
 --------------------------------------------------------------------------------
 
  best 6 delay control airports sort by delay ratio: 
@@ -369,14 +369,14 @@ dtype: float64
 
  how these airports control delay: 
 
-                                                    carrier_ct  weather_ct  nas_ct  security_ct  late_aircraft_ct  arr_cancelled  arr_diverted           min  min_value
-airport_name                                                                                                                                                           
-Las Vegas, NV: McCarran International                   436.69       43.09  469.13         7.22            474.84             55             4  arr_diverted       4.00
-Los Angeles, CA: Los Angeles International              750.35       69.83  666.43         7.98            505.39            106            28   security_ct       7.98
-Minneapolis, MN: Minneapolis-St Paul International      428.77      110.06  359.91         2.13            370.14             26             8   security_ct       2.13
-New York, NY: John F. Kennedy International             401.03       16.49  325.80         2.65            417.05             23             3   security_ct       2.65
-Phoenix, AZ: Phoenix Sky Harbor International           526.47       29.58  470.64         4.63            533.69             79             7   security_ct       4.63
-Salt Lake City, UT: Salt Lake City International        404.00       97.54  355.59         0.39            278.46             27             4   security_ct       0.39
+                                                    arr_flights  arr_del15  carrier_ct  weather_ct  nas_ct  security_ct  late_aircraft_ct  arr_cancelled  arr_diverted           min  min_value
+airport_name                                                                                                                                                                                   
+Las Vegas, NV: McCarran International                     13099     1431.0      436.69       43.09  469.13         7.22            474.84             55             4  arr_diverted       4.00
+Los Angeles, CA: Los Angeles International                16643     2000.0      750.35       69.83  666.43         7.98            505.39            106            28   security_ct       7.98
+Minneapolis, MN: Minneapolis-St Paul International        11575     1271.0      428.77      110.06  359.91         2.13            370.14             26             8   security_ct       2.13
+New York, NY: John F. Kennedy International                9764     1163.0      401.03       16.49  325.80         2.65            417.05             23             3   security_ct       2.65
+Phoenix, AZ: Phoenix Sky Harbor International             14557     1565.0      526.47       29.58  470.64         4.63            533.69             79             7   security_ct       4.63
+Salt Lake City, UT: Salt Lake City International           9467     1136.0      404.00       97.54  355.59         0.39            278.46             27             4   security_ct       0.39
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 

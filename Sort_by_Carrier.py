@@ -67,13 +67,32 @@ def Carrier_strategies(airline_delay_data,write_output_to_file,separator, factor
     write_output_to_file(Sorted_control_level)
     write_output_to_file(separator)
 
+    # figure of Sorted control level
+    matplotlib.use("Qt5Agg")
+    plt.figure(figsize=[30, 20])
+    ''' set ylab as percentage'''
+    ax = plt.gca()
+    ax.yaxis.set_major_formatter(mticker.PercentFormatter(1.0))
+
+    bars = Sorted_control_level.plot(kind='bar')
+
+    # add value to each bar
+    for bar in bars.patches:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, yval, f'{yval: .2%}', ha='center', va='bottom')
+
+    plt.xticks(rotation=-15)
+    plt.title('Total_delay_control_level_of_all_17_airlines')
+    plt.savefig('plot/Total_delay_control_level_of_all_17_airlines')
+    plt.close()
+
     # detail of best6 delay control carriers
     filtered_carriers = airline_delay_data[airline_delay_data['carrier_name'].isin(Sorted_control_level.tail(6).index)]
-    selected_columns = ['carrier_name', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
+    selected_columns = ['carrier_name', 'arr_flights','arr_del15','carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
                         'late_aircraft_ct', 'arr_cancelled', 'arr_diverted']
     filtered_carriers_selected = filtered_carriers[selected_columns].groupby('carrier_name').sum()
 
-    filtered_carriers_selected['min'] = filtered_carriers_selected[selected_columns[1:]].idxmin(axis=1)
+    filtered_carriers_selected['min_index'] = filtered_carriers_selected[selected_columns[1:]].idxmin(axis=1)
     filtered_carriers_selected['min_value'] = filtered_carriers_selected[selected_columns[1:]].min(axis=1)
 
     write_output_to_file("\n how these carriers control delay: \n")
@@ -112,7 +131,7 @@ def Airport_strategies(airline_delay_data,write_output_to_file,separator):
 
     # detail of best6 delay control carriers
     filtered_airports = airline_delay_data[airline_delay_data['airport_name'].isin(best6_airports.index)]
-    selected_columns = ['airport_name', 'carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
+    selected_columns = ['airport_name', 'arr_flights','arr_del15','carrier_ct', 'weather_ct', 'nas_ct', 'security_ct',
                         'late_aircraft_ct', 'arr_cancelled', 'arr_diverted']
     filtered_airports_selected = filtered_airports[selected_columns].groupby('airport_name').sum()
 
