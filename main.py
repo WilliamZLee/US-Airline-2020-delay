@@ -13,12 +13,10 @@ airline_delay_data = pd.read_csv('data/airline_delay_causes_Feb2020.csv')
 # create file output.txt to save output
 output_file = open("output.txt", "w")
 
-
 # def a funtion to write in
 def write_output_to_file(output):
     print(output)
     print(output, file=output_file)
-
 
 # airline_delay_data.info()
 # airports_data.info()
@@ -35,8 +33,6 @@ flights_count = airline_delay_data[['arr_flights', 'arr_del15', 'arr_cancelled',
 # set index by state
 delay_count_row = delay_count.set_index('state', drop=True)
 delay_time_row = delay_time.set_index('state', drop=True)
-
-
 # delay_count_row.info()
 
 def run_analysis(airline_delay_data, delay_count, airports_data, flights_count):
@@ -76,7 +72,6 @@ def run_analysis(airline_delay_data, delay_count, airports_data, flights_count):
 
     write_output_to_file(separator)
     write_output_to_file("\nAll the generated images throughout the process are stored in the 'plot' folder")
-
 
 run_analysis(airline_delay_data, delay_count, airports_data, flights_count)
 
